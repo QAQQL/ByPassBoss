@@ -1,0 +1,16 @@
+tensorflow==2.12.1
+opencv-python==4.10.0.84
+pynput
+pygetwindow
+plyer
+win10toast
+PyQt5
+# tflite_runtime: https://www.tensorflow.org/lite/guide/python
+# coreml 4.0: https://github.com/apple/coremltools
+
+# 附加项
+# py 3.10.7
+# https://pytorch.org/get-started/previous-versions/#v250
+# nvidia-smi
+# pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cu124
+# torch==2.5.0
