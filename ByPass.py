@@ -1,5 +1,7 @@
+import logging
 import os
 import sys
+import traceback
 from os import mkdir
 from time import time
 
@@ -11,9 +13,11 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QIcon, QImage, QPixmap
 from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction
-from plyer import notification
-import logging
-import traceback
+from win10toast import ToastNotifier
+
+# from plyer import notification
+
+toaster = ToastNotifier()
 
 os.makedirs('./logs', exist_ok=True)
 logging.basicConfig(filename='./logs/detection.log', level=logging.DEBUG)
@@ -60,7 +64,8 @@ def switch_to_desktop():
         if any(keyword in _window.title for keyword in hide_list) and _window.visible:
             print(_window.title)
             _window.minimize()
-    notification.notify(title="C", message="End", timeout=1)
+    # notification.notify(title="C", message="End", timeout=1)
+    toaster.show_toast("C", "End", duration=1, threaded=True)
 
 
 class FaceDetectionThread(QThread):
@@ -262,7 +267,8 @@ class MainWindow(QtWidgets.QMainWindow):
         if _roi:
             self.face_thread.set_roi(_roi)
             print(f"ROI 设置为: {_roi}")
-            notification.notify(title="C", message="结束框选", timeout=2)
+            # notification.notify(title="C", message="结束框选", timeout=2)
+            toaster.show_toast("C", "End", duration=2, threaded=True)
         self.start_button.setEnabled(True)
         self.select_roi_button.setEnabled(True)
 
